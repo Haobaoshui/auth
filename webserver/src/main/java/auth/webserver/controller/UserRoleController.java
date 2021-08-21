@@ -25,70 +25,70 @@ public class UserRoleController {
         this.userRoleService = userRoleService;
     }
 
-    @RequestMapping(value = "add", method = RequestMethod.POST)
+    @PostMapping( "add")
     public String add(@RequestBody UserRole userRole) {
         return userRoleService.add( userRole);
     }
 
-    @RequestMapping(value = "adds", method = RequestMethod.POST)
+    @PostMapping( "adds")
     public String add(@RequestBody List<UserRole> userRoleList) {
         return userRoleService.add( userRoleList);
     }
 
-    @RequestMapping(value = "addroles", method = RequestMethod.POST)
+    @PostMapping( "addroles")
     public String add(@RequestBody UserRoleFormData userRoleFormData) {
         return userRoleService.add( userRoleFormData);
     }
 
 
-    @RequestMapping(value = "delete", method = RequestMethod.DELETE)
+    @DeleteMapping( "delete")
     public int delete(@RequestBody UserRole userRole) {
 
         return userRoleService.delete( userRole);
     }
 
-    @RequestMapping(value = "deletes", method = RequestMethod.DELETE)
+    @DeleteMapping( "deletes")
     public int delete(@RequestBody User user) {
 
         return userRoleService.delete( user);
     }
 
-    @RequestMapping(value = "isexist", method = RequestMethod.GET)
+    @GetMapping( "isexist")
     public boolean isexist(@RequestBody UserRole userRole) {
         if (userRole != null) return userRoleService.isExist(userRole.getUserId(), userRole.getRoleId());
         return false;
 
     }
 
-    @RequestMapping(value = "permission", method = RequestMethod.GET)
+    @GetMapping( "permission")
     public boolean hasAuth(@RequestBody UserPermissionFormData userPermissionFormData) {
         if (userPermissionFormData != null) return userRoleService.isExistPermission(userPermissionFormData);
         return false;
 
     }
 
-    @RequestMapping(value = "update", method = RequestMethod.PUT)
+    @PutMapping( "update")
     public int update(@RequestBody UserRole userRole) {
         return userRoleService.update( userRole);
     }
 
-    @RequestMapping(value = "updates", method = RequestMethod.PUT)
+    @PutMapping( "updates")
     public int update(@RequestBody UserRoleFormData userRoleFormData) {
         return userRoleService.update( userRoleFormData);
     }
 
-    @RequestMapping(value = "users", method = RequestMethod.GET)
+    @GetMapping( "users")
     public List<User> getUsersByRoleId(@RequestParam(value = "roleId", required = true) String roleId) {
         return userRoleService.getUsersByRoleId(roleId);
     }
 
-    @RequestMapping(value = "roles", method = RequestMethod.GET)
+    @GetMapping("roles")
     public List<Role> getRolesByUserId(@RequestParam(value = "userId", required = true) String userId) {
         return userRoleService.getRolesByUserId(userId);
     }
 
 
-    @RequestMapping(value = "page", method = RequestMethod.GET)
+    @GetMapping( "page")
     public Page<UserRole> getPage(@RequestParam(value = "pageNo", required = false) Integer pageNo,
                                   @RequestParam(value = "pageSize", required = false) Integer pageSize) {
         pageNo = pageNo == null ? 1 : (pageNo < 1 ? 1 : pageNo);
@@ -96,7 +96,7 @@ public class UserRoleController {
         return userRoleService.getPage(pageNo, pageSize);
     }
 
-    @RequestMapping(value = "viewpage", method = RequestMethod.GET)
+    @GetMapping( "viewpage")
     public Page<UserRoleView> getUserRoleViewPage(@RequestParam(value = "pageNo", required = false) Integer pageNo,
                                                   @RequestParam(value = "pageSize", required = false) Integer pageSize) {
         pageNo = pageNo == null ? 1 : (pageNo < 1 ? 1 : pageNo);
@@ -104,7 +104,7 @@ public class UserRoleController {
         return userRoleService.getUserRoleViewPage(pageNo, pageSize);
     }
 
-    @RequestMapping(value = "searchviewpage", method = RequestMethod.GET)
+    @GetMapping( "searchviewpage")
     public Page<UserRoleView> getUserRoleViewPage(@RequestParam(value = "searchText", required = true) String searchText,
                                                   @RequestParam(value = "pageNo", required = false) Integer pageNo,
                                                   @RequestParam(value = "pageSize", required = false) Integer pageSize) {
@@ -113,7 +113,7 @@ public class UserRoleController {
         return userRoleService.getUserRoleViewPage(searchText, pageNo, pageSize);
     }
 
-    @RequestMapping(value = "userpagebyrole", method = RequestMethod.GET)
+    @GetMapping( "userpagebyrole")
     public Page<User> getUsersByRoleId(@RequestParam(value = "roleId", required = true) String roleId,
                                        @RequestParam(value = "pageNo", required = false) Integer pageNo,
                                        @RequestParam(value = "pageSize", required = false) Integer pageSize) {
@@ -122,7 +122,7 @@ public class UserRoleController {
         return userRoleService.getUsersByRoleId(roleId, pageNo, pageSize);
     }
 
-    @RequestMapping(value = "searchuserpagebyrole", method = RequestMethod.GET)
+    @GetMapping("searchuserpagebyrole")
     public Page<User> getUsersByRoleId(@RequestParam(value = "searchText", required = true) String searchText,
                                        @RequestParam(value = "roleId", required = true) String roleId,
                                        @RequestParam(value = "pageNo", required = false) Integer pageNo,

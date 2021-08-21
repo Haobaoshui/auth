@@ -26,40 +26,40 @@ public class RoleController {
         this.roleService = roleService;
     }
 
-    @RequestMapping(value = "add", method = RequestMethod.POST)
+    @PostMapping( "role")
     public String add(@RequestBody Role role) {
         return roleService.add( role);
     }
 
-    @RequestMapping(value = "delete", method = RequestMethod.DELETE)
+    @DeleteMapping( "role")
     public int delete(@RequestBody Role role) {
 
         return roleService.delete( role);
     }
 
-    @RequestMapping(value = "isexist", method = RequestMethod.GET)
+    @GetMapping( "isexist")
     public boolean isexist(@RequestBody String name) {
         if (name != null && name.length() > 0) return roleService.isExistByName(name);
         return false;
     }
 
-    @RequestMapping(value = "update", method = RequestMethod.PUT)
+    @PutMapping("role")
     public int update(@RequestBody Role role) {
         return roleService.update( role);
     }
 
 
-    @RequestMapping(value = "viewlist", method = RequestMethod.GET)
+    @GetMapping( "viewlist")
     public List<RoleView> getAllRoleViews() {
         return roleService.getAllRoleViews();
     }
 
-    @RequestMapping(value = "list", method = RequestMethod.GET)
+    @GetMapping( "list")
     public List<Role> getAll() {
         return roleService.getAll();
     }
 
-    @RequestMapping(value = "page", method = RequestMethod.GET)
+    @GetMapping( "page")
     public Page<Role> getPage(@RequestParam(value = "pageNo", required = false) Integer pageNo,
                               @RequestParam(value = "pageSize", required = false) Integer pageSize) {
 
@@ -71,7 +71,7 @@ public class RoleController {
 
     }
 
-    @RequestMapping(value = "viewpage", method = RequestMethod.GET)
+    @GetMapping( "viewpage")
     public Page<RoleView> getViewPage(@RequestParam(value = "pageNo", required = false) Integer pageNo,
                                       @RequestParam(value = "pageSize", required = false) Integer pageSize) {
 
@@ -83,7 +83,7 @@ public class RoleController {
 
     }
 
-    @RequestMapping(value = "searchpage", method = RequestMethod.GET)
+    @GetMapping( "searchpage")
     public Page<Role> getSearchedPage(@RequestParam(value = "searchText", required = true) String searchText,
                                       @RequestParam(value = "pageNo", required = false) Integer pageNo,
                                       @RequestParam(value = "pageSize", required = false) Integer pageSize) {

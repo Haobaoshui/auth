@@ -28,48 +28,48 @@ public class RolePermissionController {
         this.rolePermissionService = rolePermissionService;
     }
 
-    @RequestMapping(value = "add", method = RequestMethod.POST)
+    @PostMapping( "rolepermission")
     public String add(@RequestBody RolePermission rolePermission) {
         return rolePermissionService.add( rolePermission);
     }
 
-    @RequestMapping(value = "delete", method = RequestMethod.DELETE)
+    @DeleteMapping( "rolepermission")
     public int delete(@RequestBody RolePermission rolePermission) {
 
         return rolePermissionService.delete( rolePermission);
     }
 
-    @RequestMapping(value = "isexist", method = RequestMethod.GET)
+    @GetMapping(value = "isexist")
     public boolean isexist(@RequestBody RolePermission rolePermission) {
         if (rolePermission != null)
             return rolePermissionService.isExist(rolePermission.getRoleId(), rolePermission.getPermissionId());
         return false;
     }
 
-    @RequestMapping(value = "update", method = RequestMethod.PUT)
+    @PutMapping( "rolepermission")
     public int update(@RequestBody RolePermission rolePermission) {
         return rolePermissionService.update( rolePermission);
     }
 
-    @RequestMapping(value = "updates", method = RequestMethod.PUT)
+    @PutMapping( "updates")
     public int update(@RequestBody RolePermissionFormData rolePermissionFormData) {
 
         return rolePermissionService.update( rolePermissionFormData);
     }
 
 
-    @RequestMapping(value = "permissions", method = RequestMethod.GET)
+    @GetMapping( "permissions")
     public List<Permission> getPermissionsByRoleId(@RequestParam(value = "roleId", required = true) String roleId) {
         return rolePermissionService.getPermissionsByRoleId(roleId);
     }
 
-    @RequestMapping(value = "roles", method = RequestMethod.GET)
+    @GetMapping( "roles")
     public List<Role> getRolesByPermissionId(@RequestParam(value = "permissionId", required = true) String permissionId) {
         return rolePermissionService.getRolesByPermissionId(permissionId);
     }
 
 
-    @RequestMapping(value = "page", method = RequestMethod.GET)
+    @GetMapping( "page")
     public Page<RolePermission> getPage(@RequestParam(value = "pageNo", required = false) Integer pageNo,
                                         @RequestParam(value = "pageSize", required = false) Integer pageSize) {
 

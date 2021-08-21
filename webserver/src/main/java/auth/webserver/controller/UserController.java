@@ -1,7 +1,6 @@
 package auth.webserver.controller;
 
 
-
 import auth.webserver.configure.CommonConstant;
 import auth.webserver.model.Page;
 import auth.webserver.model.user.LoginFormData;
@@ -31,12 +30,12 @@ public class UserController {
      *
      * @return
      */
-    @RequestMapping(value = "identifycode", method = RequestMethod.GET)
+    @GetMapping("identifycode")
     public String getIdentifyCode() {
         return SessionUser.genCode();
     }
 
-    @RequestMapping(value = "isrightidcode", method = RequestMethod.GET)
+    @GetMapping("isrightidcode")
     public boolean isIdentifyCodeCorrect(@RequestBody String code) {
         return userService.isIdentifyCodeCorrect(code);
     }
@@ -47,7 +46,7 @@ public class UserController {
      * @param loginFormData
      * @return
      */
-    @RequestMapping(value = "login", method = RequestMethod.POST)
+    @PostMapping("login")
     public ResponseEntity<UserSessionInfo> doLogin(@RequestBody LoginFormData loginFormData) {
         return userService.doLogin(loginFormData);
     }
@@ -69,27 +68,29 @@ public class UserController {
      * @param user
      * @return
      */
-    @RequestMapping(value = "changepwd", method = RequestMethod.PUT)
+    @PutMapping("changepwd")
     public User changepwd(@RequestBody User user) {
         return userService.changePwd(user);
     }
 
-    @RequestMapping(value = "resetpwd", method = RequestMethod.PUT)
+    @PutMapping("resetpwd")
     public User resetpwd(@RequestBody User user) {
         return userService.resetPwd(user);
     }
 
-    @RequestMapping(value = "add", method = RequestMethod.POST)
+
+    @PostMapping("user")
     public String add(@RequestBody User user) {
         return userService.add(user);
     }
 
-    @RequestMapping(value = "delete", method = RequestMethod.DELETE)
+
+    @DeleteMapping("user")
     public int delete(@RequestBody User user) {
         return userService.delete(user);
     }
 
-    @RequestMapping(value = "isexist", method = RequestMethod.GET)
+    @GetMapping("isexist")
     public boolean isExistByEmployeeNum(@RequestBody String employeeNum) {
         if (employeeNum != null && employeeNum.length() > 0) return userService.isExistByEmplNum(employeeNum);
         return false;
@@ -101,7 +102,7 @@ public class UserController {
      * @param userId userId
      * @return
      */
-    @RequestMapping(value = "isUserLogin", method = RequestMethod.GET)
+    @GetMapping("isUserLogin")
     public boolean isUserLoginIn(@RequestParam(value = "userId", required = true) String userId) {
         if (userId != null && userId.length() > 0) return userService.isUserLoginIn(userId);
         return false;
@@ -114,7 +115,7 @@ public class UserController {
      * @param password
      * @return
      */
-    @RequestMapping(value = "isusercorrect", method = RequestMethod.GET)
+    @GetMapping("isusercorrect")
     public boolean isUserCorrect(@RequestParam(value = "userId", required = true) String userId,
                                  @RequestParam(value = "password", required = true) String password) {
         if (userId != null && userId.length() > 0 && password != null && password.length() > 0)
@@ -122,13 +123,13 @@ public class UserController {
         return false;
     }
 
-    @RequestMapping(value = "update", method = RequestMethod.PUT)
+    @PutMapping("user")
     public int update(@RequestBody User user) {
         return userService.update(user);
     }
 
 
-    @RequestMapping(value = "page", method = RequestMethod.GET)
+    @GetMapping("page")
     public Page<User> getPage(@RequestParam(value = "pageNo", required = false) Integer pageNo,
                               @RequestParam(value = "pageSize", required = false) Integer pageSize) {
 
@@ -138,7 +139,7 @@ public class UserController {
         return userService.getPage(pageNo, pageSize);
     }
 
-    @RequestMapping(value = "searchpage", method = RequestMethod.GET)
+    @GetMapping("searchpage")
     public Page<User> getSearchedPage(@RequestParam(value = "searchText", required = true) String searchText,
                                       @RequestParam(value = "pageNo", required = false) Integer pageNo,
                                       @RequestParam(value = "pageSize", required = false) Integer pageSize) {

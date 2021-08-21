@@ -23,35 +23,35 @@ public class PermissionController {
         this.permissionService = permissionService;
     }
 
-    @RequestMapping(value = "add", method = RequestMethod.POST)
+    @PostMapping( "permission")
     public String add(@RequestBody Permission permission) {
         return permissionService.add(permission);
     }
 
-    @RequestMapping(value = "delete", method = RequestMethod.DELETE)
+    @DeleteMapping( "permission")
     public int delete(@RequestBody Permission permission) {
 
         return permissionService.delete(permission);
     }
 
-    @RequestMapping(value = "isexist", method = RequestMethod.GET)
+    @GetMapping( "isexist")
     public boolean isexist(@RequestBody String name) {
         if (name != null && name.length() > 0) return permissionService.isExistByName(name);
         return false;
     }
 
-    @RequestMapping(value = "update", method = RequestMethod.PUT)
+    @PutMapping( "permission")
     public int update(@RequestBody Permission permission) {
         return permissionService.update(permission);
     }
 
 
-    @RequestMapping(value = "list", method = RequestMethod.GET)
+    @GetMapping( "list")
     public List<Permission> getAllRoleViews() {
         return permissionService.getAll();
     }
 
-    @RequestMapping(value = "page", method = RequestMethod.GET)
+    @GetMapping( "page")
     public Page<Permission> getPage(@RequestParam(value = "pageNo", required = false) Integer pageNo,
                                     @RequestParam(value = "pageSize", required = false) Integer pageSize) {
 

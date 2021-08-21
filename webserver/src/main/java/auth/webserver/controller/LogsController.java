@@ -9,10 +9,8 @@ import auth.webserver.model.log.LogsView;
 import auth.webserver.service.LogsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import org.springframework.util.StringUtils;
@@ -42,7 +40,7 @@ public class LogsController {
      *                 dateEnd: 2020-10-18T15:59:59.792Z
      * @return
      */
-    @RequestMapping(value = "page", method = RequestMethod.GET)
+    @GetMapping( "page")
     public Page<LogsView> getPage(@RequestParam(value = "dateBegin", required = false) String dateBegin,
                                   @RequestParam(value = "dateEnd", required = false) String dateEnd,
                                   @RequestParam(value = "pageNo", required = false) Integer pageNo,
@@ -66,7 +64,7 @@ public class LogsController {
 
     }
 
-    @RequestMapping(value = "searchpage", method = RequestMethod.GET)
+    @GetMapping( "searchpage")
     public Page<LogsView> getSearchPage(@RequestParam(value = "searchText", required = false) String searchText,
                                         @RequestParam(value = "dateBegin", required = false) String dateBegin,
                                         @RequestParam(value = "dateEnd", required = false) String dateEnd,
@@ -89,7 +87,7 @@ public class LogsController {
 
     }
 
-    @RequestMapping(value = "userpage", method = RequestMethod.GET)
+    @GetMapping( "userpage")
     public Page<LogsView> getUserPage(@RequestParam(value = "userId", required = true) String userId,
                                       @RequestParam(value = "pageNo", required = false) Integer pageNo,
                                       @RequestParam(value = "pageSize", required = false) Integer pageSize) {
@@ -102,7 +100,7 @@ public class LogsController {
 
     }
 
-    @RequestMapping(value = "usersearchpage", method = RequestMethod.GET)
+    @GetMapping( "usersearchpage")
     public Page<LogsView> getUserSearchPage(@RequestParam(value = "userId", required = true) String userId,
                                             @RequestParam(value = "dateBegin", required = false) String dateBegin,
                                             @RequestParam(value = "dateEnd", required = false) String dateEnd,
@@ -127,7 +125,7 @@ public class LogsController {
 
         }
 
-    @RequestMapping(value = "statistics", method = RequestMethod.GET)
+    @GetMapping( "statistics")
     public List<LogsStatistics> getLogsStatisticsList(@RequestParam(value = "searchText", required = false) String searchText,
                                                       @RequestParam(value = "dateBegin", required = false) String beginDate,
                                                       @RequestParam(value = "dateEnd", required = false) String endDateStr) throws ParseException {
@@ -151,7 +149,7 @@ public class LogsController {
 //        return logsService.getStatisticsList(searchText, dateBegin, dateEnd);
 //    }
 
-    @RequestMapping(value = "userstatistics", method = RequestMethod.GET)
+    @GetMapping( "userstatistics")
     public List<LogsStatistics> getUserLogsStatisticsList(@RequestParam(value = "userId", required = true) String userId) {
         return logsService.getStatisticsList(userId);
     }
